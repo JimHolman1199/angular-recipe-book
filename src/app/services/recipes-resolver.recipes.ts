@@ -1,5 +1,5 @@
-import { RecipeService } from './../components/recipes/recipe.service';
-import { Recipe } from './../components/recipes/recipe.model';
+import { RecipeService } from './recipe.service';
+import { Recipe } from './../models/recipe.model';
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 

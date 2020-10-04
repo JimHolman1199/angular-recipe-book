@@ -1,10 +1,11 @@
-import { map, tap } from 'rxjs/operators';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
-import { Recipe } from './recipe.model';
+import { ShoppingListService } from '../components/shopping-list/shopping-list.service';
+import { Recipe } from '../models/recipe.model';
 import { Injectable } from '@angular/core';
-import { Ingredient } from '../shared/ingredient.model';
-import { HttpClient } from '@angular/common/http';
+import { Ingredient } from '../models/ingredient.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
 export class RecipeService {
@@ -31,7 +32,8 @@ export class RecipeService {
     // ]
 
     constructor(private slService: ShoppingListService,
-                private http: HttpClient){}
+                private http: HttpClient,
+                private authService: AuthService){}
 
     storeRecipes(){
         const recipes = this.getRecipes();
@@ -41,8 +43,9 @@ export class RecipeService {
     }
 
     fetchRecipes(){
-        return this.http.get<Recipe[]>(this._url)
-            .pipe(map(recipes=>{
+        return this.http.get<Recipe[]>( this._url)
+            .pipe(
+                map(recipes=>{
                     return recipes.map(recipe=>{
                         return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }
                     })
