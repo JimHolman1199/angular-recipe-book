@@ -20,6 +20,8 @@ import { DropdownDirective } from './components/shared/dropdown.directive';
 import { RecipeStartComponent } from './components/recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { PlaceholderDirective } from './components/shared/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AuthComponent } from './components/auth/auth.component';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     HttpClientModule,
